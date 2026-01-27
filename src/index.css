@@ -1,0 +1,330 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Delivo Design System - Exact Match from Original */
+
+@layer base {
+  :root {
+    /* Core Brand Colors */
+    --primary: 18 97% 60%; /* #FD6931 - Delivo Orange */
+    --primary-foreground: 0 0% 100%;
+
+    /* Background System */
+    --background: 0 0% 0%; /* #000000 */
+    --foreground: 0 0% 100%; /* #FFFFFF */
+
+    /* Card & Surface Colors */
+    --card: 0 0% 8%; /* #141414 */
+    --card-foreground: 0 0% 100%;
+
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 100%;
+
+    /* Secondary Colors */
+    --secondary: 0 0% 10%; /* rgba(26, 26, 26, 0.6) equivalent */
+    --secondary-foreground: 0 0% 100%;
+
+    /* Muted Colors */
+    --muted: 0 0% 15%;
+    --muted-foreground: 215 14% 50%; /* #697586 */
+
+    /* Accent Colors */
+    --accent: 18 97% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Destructive/Error */
+    --destructive: 0 84% 60%; /* #FF3B30 */
+    --destructive-foreground: 0 0% 100%;
+
+    /* Input & Borders */
+    --border: 0 0% 20%;
+    --input: 0 0% 10%;
+    --ring: 18 97% 60%;
+
+    /* Border Radius */
+    --radius: 0.75rem; /* 12px base */
+    --radius-button: 1.75rem; /* 28px */
+    --radius-card: 1rem; /* 16px */
+
+    /* Status Bar */
+    --status-bar: 0 0% 0%;
+
+    /* Sidebar (for future use) */
+    --sidebar-background: 0 0% 5%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 18 97% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 15%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 18 97% 60%;
+  }
+
+  /* Light mode override - keeping dark as default for this app */
+  .light {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+    --card: 0 0% 98%;
+    --card-foreground: 0 0% 0%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Custom scrollbar for desktop */
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+    border-radius: 2px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary) / 0.5);
+    border-radius: 2px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary));
+  }
+}
+
+@layer utilities {
+  /* Text gradient utility */
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary to-orange-400 bg-clip-text text-transparent;
+  }
+
+  /* Glass morphism */
+  .glass {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10;
+  }
+
+  /* Delivo button styles */
+  .btn-primary {
+    @apply bg-primary text-primary-foreground rounded-[28px] font-semibold
+           transition-all duration-200 hover:brightness-110 active:scale-[0.98]
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  /* Input styles matching original */
+  .input-delivo {
+    @apply bg-secondary/60 border-0 rounded-xl text-foreground
+           placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/50
+           transition-all duration-200;
+  }
+
+  /* Card hover effect */
+  .card-hover {
+    @apply transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98];
+  }
+
+  /* Safe area utilities for mobile */
+  .safe-top {
+    padding-top: env(safe-area-inset-top, 0);
+  }
+
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+
+  /* Animation delays */
+  .delay-100 {
+    animation-delay: 100ms;
+  }
+  .delay-200 {
+    animation-delay: 200ms;
+  }
+  .delay-300 {
+    animation-delay: 300ms;
+  }
+  .delay-400 {
+    animation-delay: 400ms;
+  }
+  .delay-500 {
+    animation-delay: 500ms;
+  }
+}
+
+/* Custom animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+}
+
+@keyframes wave {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(20deg);
+  }
+  75% {
+    transform: rotate(-15deg);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.animate-slideUp {
+  animation: slideUp 0.4s ease-out forwards;
+}
+
+.animate-wave {
+  animation: wave 1.5s ease-in-out infinite;
+  transform-origin: 70% 70%;
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--muted)) 25%,
+    hsl(var(--muted) / 0.5) 50%,
+    hsl(var(--muted)) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Status bar simulation */
+.status-bar {
+  height: env(safe-area-inset-top, 44px);
+  min-height: 44px;
+}
+
+/* Home indicator simulation */
+.home-indicator {
+  width: 134px;
+  height: 5px;
+  background: white;
+  border-radius: 100px;
+  opacity: 0.3;
+}
+
+/* OTP Input custom styles */
+.otp-input {
+  @apply w-14 h-14 text-center text-2xl font-bold bg-secondary/60
+         border-2 border-transparent rounded-xl text-foreground
+         focus:border-primary focus:ring-0 focus:outline-none
+         transition-all duration-200;
+}
+
+.otp-input:focus {
+  @apply border-primary bg-secondary;
+}
+
+/* Checkbox custom styles */
+.checkbox-delivo {
+  @apply w-6 h-6 rounded-lg border-2 border-muted-foreground/30
+         checked:bg-primary checked:border-primary
+         focus:ring-2 focus:ring-primary/50;
+}
+
+/* Range slider custom styles */
+.range-delivo {
+  @apply w-full h-1 bg-muted rounded-full appearance-none cursor-pointer;
+}
+
+.range-delivo::-webkit-slider-thumb {
+  @apply appearance-none w-5 h-5 bg-primary rounded-full cursor-pointer
+         shadow-lg transition-transform hover:scale-110;
+}
+
+/* Bottom navigation active indicator */
+.nav-active::after {
+  content: "";
+  @apply absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1
+         bg-primary rounded-full;
+}
